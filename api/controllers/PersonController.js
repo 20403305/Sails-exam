@@ -42,16 +42,6 @@ module.exports = {
         }
     },
 
-    // action - read
-    enquiry: async function (req, res) {
-
-        var thatPerson = await Person.findOne({ markid: 1 });
-
-        if (!thatPerson) return res.notFound();
-
-        return res.view('person/enquiry', { person: thatPerson });
-    },
-
 
 
 
