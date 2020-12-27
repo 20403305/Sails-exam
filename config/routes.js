@@ -35,4 +35,8 @@ module.exports.routes = {
  'GET /page-count': 'PersonController.pagecount',
  'POST /page-count': 'PersonController.pagecount',
 
+ 'GET /enquiry': 'PersonController.enquiry',
+ 'POST /enquiry': 'PersonController.enquiry',
+ 'GET /enquiries': 'PersonController.enquiries',
+
 };

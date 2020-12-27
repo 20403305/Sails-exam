@@ -28,22 +28,32 @@ module.exports = {
         } else {
 
 
-            if (req.wantsJSON){
+            if (req.wantsJSON) {
 
                 var updatedPerson = await Person.updateOne({ markid: 1 }).set({ jishu: 0 });
 
                 if (!updatedPerson) return res.notFound();
-                return res.json('OK now is '+updatedPerson.jishu);
+                return res.json('OK now is ' + updatedPerson.jishu);
 
             } else {
                 return res.redirect('/');			// for normal request
             }
 
-
-
-
         }
     },
+
+    // action - read
+    enquiry: async function (req, res) {
+
+        var thatPerson = await Person.findOne({ markid: 1 });
+
+        if (!thatPerson) return res.notFound();
+
+        return res.view('person/enquiry', { person: thatPerson });
+    },
+
+
+
 
 };
 
