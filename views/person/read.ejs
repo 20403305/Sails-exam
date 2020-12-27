@@ -1,0 +1,45 @@
+<p id="show">
+    <%= person.jishu %>
+</p>
+<!-- hello  -->
+
+<!-- <br></br> -->
+<button onclick="clearthenumber()">Clear</button>
+
+<script>
+    async function clearthenumber() {
+        // var r = confirm("Confirm Clear?")
+        // if (r) {
+        //     var response = await fetch("/page-count", {
+        //         method: "POST"
+        //     });
+        //     if (response.ok) {
+        //         var html = await response.json()
+        //         alert(html);
+        //         document.getElementById('show').innerHTML=0
+        //     } else {
+        //         alert(response.status + ": " + response.statusText);
+        //     }
+
+        // } else {
+        //     alert("cancelled");
+
+        // }
+
+
+
+        var response = await fetch("/page-count", {
+            method: "POST"
+        });
+        if (response.ok) {
+            var html = await response.json()
+            // alert(html);
+            document.getElementById('show').innerHTML = 0
+        } else {
+            alert(response.status + ": " + response.statusText);
+        }
+    }
+
+
+
+</script>
