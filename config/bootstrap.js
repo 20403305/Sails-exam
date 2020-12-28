@@ -44,7 +44,7 @@ module.exports.bootstrap = async function () {
   async function generateEnquiry() {
     // error: TypeError: Enquiry.count is not a function
     if (await User.count() > 0) {
-      return;
+      return generateShop();
     }
 
     await User.createEach([
@@ -52,7 +52,41 @@ module.exports.bootstrap = async function () {
       // etc.
     ]);
 
+    return generateShop();
+  };
+
+
+  async function generateShop() {
+    // error: TypeError: Enquiry.count is not a function
+    if (await Shop.count() > 0) {
+      return;
+    }
+
+    await Shop.createEach([
+      { product: "Trilipix"},
+      { product: "Australian Gold"},
+      { product: "azithromycin"},
+      { product: "PROMETHAZINE DM"},
+      { product: "PROLONG 101"},
+      { product: "Pollens - Grasses, Brome, Smooth Bromus inermis"},
+      { product: "Chemstar Antibac"},
+      { product: "Phenytoin Sodium"},
+      { product: "Lorazepam"},
+      { product: "Gabapentin"}
+
+
+      // etc.
+    ]);
+
 
   };
+
+
+
+
+
+
+
+
 
 }

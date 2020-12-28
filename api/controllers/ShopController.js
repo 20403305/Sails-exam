@@ -6,7 +6,22 @@
  */
 
 module.exports = {
-  
+    // json function
+    shoppingcart: async function (req, res) {
+
+        var everyones = await Shop.find();
+
+        return res.json(everyones);
+    },
+
+    // json function
+    items: async function (req, res) {
+
+        var updatedPerson = await Shop.find();
+
+        return res.view('shop/list', { person: updatedPerson });
+    },
+
 
 };
 
