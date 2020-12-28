@@ -44,7 +44,9 @@ module.exports.routes = {
  'GET /enquiries': 'UserController.enquiries',
 
  'GET /items': 'ShopController.items',
- 'POST /item/:id': 'ShopController.items',
- 'GET /shopping-cart': 'ShopController.shoppingcart',
+//  'POST /item/:id': 'ShopController.items',
+ 'POST /item/:id': 'ShopuserController.redeem',
+//  'GET /shopping-cart': 'ShopController.shoppingcart',
+'GET /shopping-cart': 'ShopuserController.shoppingcart',
 
 };

@@ -59,7 +59,7 @@ module.exports.bootstrap = async function () {
   async function generateShop() {
     // error: TypeError: Enquiry.count is not a function
     if (await Shop.count() > 0) {
-      return;
+      return generateShopuser();
     }
 
     await Shop.createEach([
@@ -73,14 +73,24 @@ module.exports.bootstrap = async function () {
       { product: "Phenytoin Sodium"},
       { product: "Lorazepam"},
       { product: "Gabapentin"}
-
-
       // etc.
     ]);
 
-
+    return generateShopuser();
   };
 
+  async function generateShopuser() {
+
+    if (await Shopuser.count() > 0) {
+      return;
+    }
+
+    await Shopuser.createEach([
+      { name: "Jack"}
+      // etc.
+    ]);
+
+  }
 
 
 

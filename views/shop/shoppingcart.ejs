@@ -1,0 +1,7 @@
+<p>The medicine you redeem are as follow:</p>
+<br></br>
+<br></br>
+<% medicals.coupons.forEach( function(medical) { %>
+    <%= medical.id %> : <%= medical.product %>
+        <br></br>
+        <% }); %>

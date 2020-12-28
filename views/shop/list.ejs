@@ -1,3 +1,50 @@
-<% medicals.forEach( function(medical) { %>
-    <p> medical name : <%= medical.product %></p>
-    <% }); %>
+<div class="columns" style="width: 600px;">
+    <div class="columns" style="width: 400px;">
+        <% medicals.forEach( function(medical) { %>
+            <%= medical.product %>
+                <br></br>
+                <% }); %>
+    </div>
+
+    <div class="columns" style="width: 200px;">
+        <div class="control">
+            <% medicals.forEach( function(medical) { %>
+                <button onclick="redeem_require('<%= medical.id %>')">place in shopping cart</button>
+                <br></br>
+                <% }); %>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    async function redeem_require(id) {
+        console.log(id)
+        id_num = parseInt(id)
+        console.log(id_num)
+        var r = confirm("Confirm Redeem?");
+
+        if (r) {
+            var response = await fetch("/item/"+id_num, {
+                method: "POST",
+            });
+
+            if (response.ok) {
+                var html = await response.json();
+                alert(html);
+                location.assign("/shopping-cart");
+            } else {
+                alert(response.status + ": " + response.statusText);
+                var msg = await response.json();
+                alert(msg);
+            }
+
+        } else {
+            alert("cancelled");
+        }
+
+    };
+</script>

@@ -6,20 +6,29 @@
  */
 
 module.exports = {
-    // json function
-    shoppingcart: async function (req, res) {
 
-        var everyones = await Shop.find();
-
-        return res.json(everyones);
-    },
 
     // json function
     items: async function (req, res) {
 
-        var everyones = await Shop.find();
 
-        return res.view('shop/list', { medicals: everyones });
+        if (req.method == "GET") {
+            var everyones = await Shop.find();
+            return res.view('shop/list', { medicals: everyones });
+        } else {
+
+
+            if (req.wantsJSON) {
+
+                var everyones = await Shop.find();
+
+                return res.json(everyones);
+
+            } else {
+                return res.redirect('/');			// for normal request
+            }
+        }
+
     },
 
 
