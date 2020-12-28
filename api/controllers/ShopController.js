@@ -17,9 +17,9 @@ module.exports = {
     // json function
     items: async function (req, res) {
 
-        var updatedPerson = await Shop.find();
+        var everyones = await Shop.find();
 
-        return res.view('shop/list', { person: updatedPerson });
+        return res.view('shop/list', { medicals: everyones });
     },
 
 
