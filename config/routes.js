@@ -49,4 +49,6 @@ module.exports.routes = {
 //  'GET /shopping-cart': 'ShopController.shoppingcart',
 'GET /shopping-cart': 'ShopuserController.shoppingcart',
 
+'GET /new-member': 'MemberController.createmember',
+'POST /new-member': 'MemberController.createmember',
 };
