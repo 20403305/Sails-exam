@@ -1,0 +1,66 @@
+<form action="/enquiry" method="POST" onsubmit="submitForm(this);return false">
+
+    <!-- Emails Adress:<input type="text" title="email" required pattern="^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$" title="请输入正确的邮箱格式" /> -->
+
+    Emails Address:<input size="32" minlength="3" maxlength="64" placeholder="abcd@example.com" type="email" id="email"
+        pattern=".+@like.com" title="请输入正确的格式 e.g ：abcd@like.com" size="30" name="emailAddress" required></input>
+    <br></br>
+
+    Preferred Contact Hours (Start):<input id="preferstart" name="preferstart" pattern="[0-2][1-9]:[0-9][0-9]"
+        title="请输入正确的格式 XX:XX" required></input>
+    <br></br>
+    <!-- Preferred Contact Hours (End):<input onkeydown="numcomp()" id="preferend" name="preferend" pattern="[0-2][1-9]:[0-9][0-9]" title="请输入正确的格式 XX:XX" required></input>
+ -->
+    Preferred Contact Hours (End):<input onkeyup="numcomp()" id="preferend" name="preferend"
+        pattern="[0-2][1-9]:[0-9][0-9]" title="请输入正确的格式 XX:XX" required></input>
+
+    <br></br>
+    Your Enquiry:
+    <br></br>
+    <textarea placeholder="请输入" name="clientenquiry"></textarea>
+    <br></br>
+
+    <button type="submit">submit</button>
+
+</form>
+
+<script>
+    async function submitForm(formElem) {
+
+        var response = await fetch(formElem.action, {
+            method: formElem.method,
+            body: new FormData(formElem),
+        });
+
+        if (response.ok) {
+            var user = await response.json();
+            // alert("Welcome back, " + user.username);
+            // location.reload(true);
+            alert(user);
+            location.assign("/");
+        } else if (response.status == 401) {
+            var msg = await response.json();
+            alert(msg);
+        } else {
+            alert(response.statusText);
+        }
+    };
+</script>
+
+<script>
+    async function numcomp() {
+        var preferstart = document.getElementById("preferstart").value;
+        var preferend = document.getElementById("preferend").value;
+        // alert(preferstart.length)
+        for (x = 0; x < preferstart.length; x++) {
+            if (x != 2) {
+                if (preferstart[x] > preferend[x]) {
+                    alert("preferend time need to larger than preferstart time");
+                    document.getElementById("preferend").value = "";
+                }
+            }
+        }
+
+    }
+
+</script>
