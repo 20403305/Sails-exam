@@ -23,6 +23,12 @@ Referral 3: <input name="referral3" placeholder="id of referral"></input>
             var info = await response.json();
             // alert("Welcome back, " + user.username);
             // location.reload(true);
+
+            // var show_info = '';
+            // for (var i in info){
+            //     show_info += info[i].id+'Name : '+info[i].name+'Credits :'+info[i].credits+'\n';
+            // }
+            // alert(show_info)
             alert(info)
             location.assign("/new-member");
         } else if (response.status == 401) {
