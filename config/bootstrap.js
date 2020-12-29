@@ -10,6 +10,7 @@
  */
 
 const Enquiry = require("../api/models/Enquiry");
+const Member = require("../api/models/Member");
 
 module.exports.bootstrap = async function () {
 
@@ -82,11 +83,37 @@ module.exports.bootstrap = async function () {
   async function generateShopuser() {
 
     if (await Shopuser.count() > 0) {
-      return;
+      return generateMember();
     }
 
     await Shopuser.createEach([
       { name: "Jack"}
+
+      // etc.
+    ]);
+
+    return generateMember();
+
+  }
+
+  async function generateMember() {
+
+    // if (await Member.count() > 0) {
+      if (await Referral.count() > 0) {
+      return;
+    }
+
+    await Referral.createEach([
+      { name: "Kirby Ritzman", credits: 500},
+      { name: "Betteann Kykel", credits: 500},
+      { name: "Nickey Hallatt", credits: 500},
+      { name: "Tarrah Ibotson", credits: 500},
+      { name: "Andrea Landsborough", credits: 500},
+      { name: "Kamila Gowdie", credits: 500},
+      { name: "Kimbra Wilcox", credits: 500},
+      { name: "Sigrid Glencross", credits: 500},
+      { name: "Selinda Oxenbury", credits: 500},
+      { name: "Lara Hallin", credits: 500}
       // etc.
     ]);
 

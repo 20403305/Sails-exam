@@ -1,1 +1,35 @@
-hello signup page
+<form action="/new-member" method="POST" onsubmit="submitForm(this);return false">
+Name: <input name="name"></input>
+<br></br>
+Referral 1: <input name="referral1" placeholder="id of referral"></input>
+<br></br>
+Referral 2: <input name="referral2" placeholder="id of referral"></input>
+<br></br>
+Referral 3: <input name="referral3" placeholder="id of referral"></input>
+<br></br>
+<button>Register</button>
+
+</form>
+
+<script>
+    async function submitForm(formElem) {
+  
+        var response = await fetch(formElem.action, {
+            method: formElem.method,
+            body: new FormData(formElem),
+        });
+  
+        if (response.ok) {
+            var info = await response.json();
+            // alert("Welcome back, " + user.username);
+            // location.reload(true);
+            alert(info)
+            location.assign("/new-member");
+        } else if (response.status == 401) {
+            var msg = await response.json();
+            alert(msg);
+        } else {
+            alert(response.statusText);
+        }
+    };
+  </script>
