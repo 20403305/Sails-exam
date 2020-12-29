@@ -12,8 +12,14 @@
                         </p>
                     </header>
                     <div class="card-content">
-                        <div class="content">
+                        <!-- <div class="content">
                             {{product.sale}}
+                        </div> -->
+                        <div class="content" v-if="product.sale">
+                            On sale
+                        </div>
+                        <div class="content" v-if="!product.sale">
+                            Normal price
                         </div>
                     </div>
                 </div>
@@ -28,14 +34,14 @@
                 <div class="field">
                     <label class="label">Product name</label>
                     <div class="control">
-                        <input class="input" type="number" name="mincoin" id="mincoin">
+                        <input class="input" type="string" name="productname" id="productname">
                     </div>
                 </div>
-                <input type="checkbox" id="onsale" name="vehicle1" value="Bike">
+                <input type="checkbox" id="onsale" name="onsale" value="onsale">
                 <label for="onsale">Only showing "On Sale" products</label><br>
                 <div class="field">
                     <div class="control">
-                        <b-button type="is-warning">Search</b-button>
+                        <b-button type="is-warning" @click="fetchPage(limit, 0)">Search</b-button>
                     </div>
                 </div>
             </section>
@@ -99,7 +105,8 @@
     new Vue({
         el: '#app',
         data: {
-            numOfRecords: parseInt("<%= numOfRecords %>"),
+            // numOfRecords: parseInt("<%= numOfRecords %>"),
+            numOfRecords: 0,
             products: [],
             currentPageNumber: 1,
             limit: 2,
@@ -112,13 +119,16 @@
         },
         methods: {
             fetchPage: async function (limit, offset) {
+                var product_url = "product=" + document.getElementById("productname").value;
+                var onsale_url = "&sale=" + document.getElementById("onsale").checked;
 
-                var response = await fetch("/product?limit=" + limit + "&offset=" + offset);
 
+                var response = await fetch("/product?"+product_url+onsale_url+"&limit=" + limit + "&offset=" + offset);
+                // console.log(response)
                 if (response.ok) {
                     var products = await response.json();
-                    this.products = products;
-
+                    this.products = products.thoseProducts;
+                    this.numOfRecords = products.count;
                     this.currentPageNumber = Math.floor(offset / limit) + 1;
                     // `this` inside methods points to the Vue instance
 
