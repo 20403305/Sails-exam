@@ -54,4 +54,6 @@ module.exports.routes = {
 
 'GET /new-member': 'ReferralController.createmember',
 'POST /new-member': 'ReferralController.createmember',
+
+'GET /product': 'ProductController.search',
 };

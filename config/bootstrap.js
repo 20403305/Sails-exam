@@ -100,7 +100,7 @@ module.exports.bootstrap = async function () {
 
     // if (await Member.count() > 0) {
       if (await Referral.count() > 0) {
-      return;
+      return generateProduct();
     }
 
     await Referral.createEach([
@@ -117,11 +117,32 @@ module.exports.bootstrap = async function () {
       // etc.
     ]);
 
+    return generateProduct();
+
   }
 
+  
+  async function generateProduct() {
 
-
-
+    // if (await Member.count() > 0) {
+      if (await Product.count() > 0) {
+        return;
+      }
+  
+      await Product.createEach([
+        { product: "Cauliflower", sale:true},
+        { product: "Cheese - Cheddarsliced", sale:true},
+        { product: "Syrup - Pancake", sale:false},
+        { product: "Pepper - Scotch Bonnet", sale:false},
+        { product: "Tobasco Sauce", sale:false},
+        { product: "Table Cloth 91x91 Colour", sale:false},
+        { product: "Tortillas - Flour, 10", sale:true},
+        { product: "Pork - Side Ribs", sale:false},
+        { product: "Crush - Grape, 355 M1", sale:false},
+        { product: "Tomatoes Tear Drop", sale:true}
+        // etc.
+      ]);
+  }
 
 
 
